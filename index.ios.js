@@ -2,6 +2,7 @@
 
 var React = require('react-native')
 var Mapbox = require('react-native-mapbox-gl')
+var secrets = require('./secrets')
 var mapRef = 'mapRef'
 
 var {
@@ -14,7 +15,7 @@ var {
 var Sirens = React.createClass({
   mixins: [Mapbox.Mixin],
 
-  getInitialState: function () {
+  getInitialState () {
     return {
       center: {
         latitude: -26.4537736,
@@ -24,19 +25,19 @@ var Sirens = React.createClass({
     }
   },
 
-  onRegionChange: function (location) {
+  onRegionChange (location) {
     this.setState({ currentZoom: location.zoom })
   },
 
-  onRegionWillChange: function (location) {
+  onRegionWillChange (location) {
     console.log(location)
   },
 
-  onUpdateUserLocation: function (location) {
+  onUpdateUserLocation (location) {
     console.log(location)
   },
 
-  onLongPress: function (location) {
+  onLongPress (location) {
     console.log('Long pressed', location)
   },
 
@@ -50,9 +51,9 @@ var Sirens = React.createClass({
           rotateEnabled={true}
           scrollEnabled={true}
           zoomEnabled={true}
-          showUserLocation={true}
+          showsUserLocation={true}
           ref={mapRef}
-          accessToken={''}
+          accessToken={secrets.development.mapboxToken}
           styleURL={this.mapStyles.emerald}
           userTrackingMode={this.userTrackingMode.none}
           centerCoordinate={this.state.center}
